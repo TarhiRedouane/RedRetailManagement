@@ -3,9 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{CD9275E6-516D-4890-9724-3B09FAF7B7D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{AE041BC7-20FA-4D51-8319-41C65CABF610}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RRMDataManager", "Server\RRMDataManager\RRMDataManager.csproj", "{B759FACD-362F-40AE-BDBB-2B6F4D71F6E5}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B759FACD-362F-40AE-BDBB-2B6F4D71F6E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B759FACD-362F-40AE-BDBB-2B6F4D71F6E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B759FACD-362F-40AE-BDBB-2B6F4D71F6E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B759FACD-362F-40AE-BDBB-2B6F4D71F6E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B759FACD-362F-40AE-BDBB-2B6F4D71F6E5} = {AE041BC7-20FA-4D51-8319-41C65CABF610}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {080D1ED6-DFB4-4A2A-B09E-BA22CCC1FEF1}
