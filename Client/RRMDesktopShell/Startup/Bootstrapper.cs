@@ -35,7 +35,6 @@ namespace RRMDesktopShell.Startup
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
-            //builder.RegisterType<ShellViewModel>().AsSelf();
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
                 .Where(type => type.Name.EndsWith("ViewModel"))
