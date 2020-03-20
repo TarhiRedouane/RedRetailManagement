@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using Autofac;
 using Caliburn.Micro;
+using RRMDesktopShell.AttachedProperties;
 using RRMDesktopShell.ViewModels;
 
 namespace RRMDesktopShell.Startup
@@ -16,6 +18,9 @@ namespace RRMDesktopShell.Startup
         public Bootstrapper()
         {
             Initialize();
+
+            ConventionManager.AddElementConvention<PasswordBox>(
+                BoundPasswordProperty.ValueProperty, "Password", "PasswordChanged");
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e)

@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="RRMDesktopShell.Views.LoginView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RRMDesktopShell.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" d:DesignWidth="700"
+      Background="AliceBlue"
+      >
+
+
+    <Border Background="{StaticResource WordBlueBrush}">
+        <Grid>
+            <Grid.Background>
+                <ImageBrush TileMode="Tile" ViewportUnits="Absolute"
+                            Viewport="0 0 500 500"
+                            ImageSource="../Images/Backgrounds/emoji-background.png"/>
+            </Grid.Background>
+
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <StackPanel
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    >
+                    <!-- login content box -->
+                    <Border Background="{StaticResource ForegroundLightBrush}"
+                            CornerRadius="10"
+                            Padding="15 50 15 15"
+                            Width="330"
+                            Margin="50 50 50 0">
+
+                        <StackPanel>
+
+                            <!-- signup header-->
+                            <TextBlock Text="Sign Up" FontSize="{StaticResource FontSizeLarge}"
+                                       FontFamily="{StaticResource LatoRegular}"
+                                       TextAlignment="Center"
+                                       Foreground="{StaticResource WordBlueBrush}"/>
+
+                            <!-- signup subtext-->
+                            <TextBlock Text="it's getting Fun "
+                                       TextAlignment="Center"
+                                       Foreground="{StaticResource ForegroundDarkBrush}"
+                                       FontSize="{StaticResource FontSizeRegular}"/>
+
+                            <!-- Email or Username -->
+                            <TextBox x:Name="UserName" Tag="Email"/>
+                            <!-- Password -->
+                            <PasswordBox x:Name="Password" Tag="Password"/>
+
+                            <Button Content="Login" HorizontalAlignment="Center" x:Name="LogIn"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+
+</UserControl>

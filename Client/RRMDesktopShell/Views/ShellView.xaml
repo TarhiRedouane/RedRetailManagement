@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:RRMDesktopShell.Views"
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" FontSize="{StaticResource FontSizeRegular}">
+            <MenuItem Header="_File"></MenuItem>
+            <MenuItem Header="_Account">
+                <MenuItem x:Name="LoginScreen" Header="_Login"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <ContentControl x:Name="ActiveItem"></ContentControl>
+        </Grid>
+    </DockPanel>
 </Window>

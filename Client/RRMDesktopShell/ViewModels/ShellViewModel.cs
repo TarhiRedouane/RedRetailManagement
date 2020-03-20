@@ -2,11 +2,13 @@
 
 namespace RRMDesktopShell.ViewModels
 {
-    public class ShellViewModel : PropertyChangedBase
+    public class ShellViewModel : Conductor<object>
     {
-
-        public ShellViewModel(IEventAggregator aggregator)
+        private LoginViewModel _loginViewModel;
+        public ShellViewModel(LoginViewModel loginViewModel)
         {
+            _loginViewModel = loginViewModel;
+            ActivateItem(loginViewModel);
         }
     }
 }
