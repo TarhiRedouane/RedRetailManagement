@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using Autofac;
 using Caliburn.Micro;
 using RRMDesktopShell.AttachedProperties;
+using RRMDesktopShell.Helpers;
 using RRMDesktopShell.ViewModels;
 
 namespace RRMDesktopShell.Startup
@@ -37,6 +38,10 @@ namespace RRMDesktopShell.Startup
                 .SingleInstance();
 
             builder.RegisterType<EventAggregator>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder.RegisterType<ApiHelper>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
 

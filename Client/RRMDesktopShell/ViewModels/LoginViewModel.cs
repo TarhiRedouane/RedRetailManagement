@@ -1,12 +1,17 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using System.Threading.Tasks;
+using Caliburn.Micro;
+using RRMDesktopShell.Helpers;
 
 namespace RRMDesktopShell.ViewModels
 {
     public class LoginViewModel : Screen
     {
-        public LoginViewModel()
-        {
+        private readonly IApiHelper _apiHelper;
 
+        public LoginViewModel(IApiHelper apiHelper)
+        {
+            _apiHelper = apiHelper;
         }
 
         #region Properties
@@ -38,11 +43,16 @@ namespace RRMDesktopShell.ViewModels
 
         public bool CanLogIn => UserName?.Length > 0 && Password?.Length > 0;
 
-        public void LogIn(string userName, string password)
+        public async Task LogIn(string userName)
         {
+            try
+            {
+                var user = await _apiHelper.Authenticate(userName, Password);
+            }
+            catch (Exception ex)
+            {
 
-        }
-
-
+                Console.WriteLine(ex.Message);
+            }        }
     }
 }

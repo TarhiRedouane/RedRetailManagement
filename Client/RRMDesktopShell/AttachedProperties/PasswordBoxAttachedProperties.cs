@@ -1,9 +1,5 @@
-﻿using System;
-using System.Globalization;
-using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using RRMDesktopShell.ValueConverters;
 
 namespace RRMDesktopShell.AttachedProperties
 {
