@@ -39,6 +39,21 @@ namespace RRMDesktopShell.ViewModels
                 NotifyOfPropertyChange(() => CanLogIn);
             }
         }
+
+        public bool HasErrorLogin => !string.IsNullOrEmpty(ErrorMessage);
+
+        private string _errorMessage;
+
+        public string ErrorMessage
+        {
+            get => _errorMessage;
+            set
+            {
+                _errorMessage = value;
+                NotifyOfPropertyChange(() => ErrorMessage);
+                NotifyOfPropertyChange(() => HasErrorLogin);
+            }
+        }
         #endregion
 
         public bool CanLogIn => UserName?.Length > 0 && Password?.Length > 0;
@@ -47,12 +62,11 @@ namespace RRMDesktopShell.ViewModels
         {
             try
             {
+                ErrorMessage = $"";
                 var user = await _apiHelper.Authenticate(userName, Password);
             }
-            catch (Exception ex)
-            {
-
-                Console.WriteLine(ex.Message);
-            }        }
+            catch (Exception ex){ ErrorMessage =ex.Message; }
+            
+        }
     }
 }

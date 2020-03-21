@@ -5,13 +5,13 @@ using System.Windows;
 namespace RRMDesktopShell.ValueConverters
 {
     /// <summary>
-    /// a convrter that takes in a boolean and return a <see cref="Visibility"/>
+    /// a converter that takes in a boolean and return a <see cref="Visibility"/>
     /// </summary>
-    public class BooleanToVisibilityConverter : BaseValueConverter<BooleanToVisibilityConverter>
+    public class ReverseBooleanToVisibilityConverter : BaseValueConverter<ReverseBooleanToVisibilityConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? Visibility.Collapsed : Visibility.Visible;
+            return (bool)value ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

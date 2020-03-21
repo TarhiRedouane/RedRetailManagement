@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RRMDesktopShell.Views"
+      xmlns:valueConverters="clr-namespace:RRMDesktopShell.ValueConverters"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="700"
       Background="AliceBlue"
@@ -45,9 +46,14 @@
                                        FontSize="{StaticResource FontSizeRegular}"/>
 
                             <!-- Email or Username -->
-                            <TextBox x:Name="UserName" Tag="Email"/>
+                            <TextBox x:Name="UserName" Tag="Email" FontSize="{StaticResource FontSizeRegular}"/>
+                            <TextBlock x:Name="ErrorMessage" Height="auto"
+                                       Visibility="{Binding HasErrorLogin,Converter={valueConverters:ReverseBooleanToVisibilityConverter}}"
+                                       Foreground="{StaticResource WordRedBrush}"
+                                       Margin="0 0 0 20"/>
                             <!-- Password -->
-                            <PasswordBox x:Name="Password" Tag="Password"/>
+                            <PasswordBox x:Name="Password" Tag="Password" FontSize="{StaticResource FontSizeRegular}"/>
+                            
 
                             <Button Content="Login" HorizontalAlignment="Center" x:Name="LogIn"/>
                         </StackPanel>
