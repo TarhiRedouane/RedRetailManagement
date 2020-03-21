@@ -1,4 +1,4 @@
-﻿namespace RRMDesktopShell.Models
+﻿namespace RRMDesktopShell.Library.Models
 {
     public class AuthenticatedUser
     {

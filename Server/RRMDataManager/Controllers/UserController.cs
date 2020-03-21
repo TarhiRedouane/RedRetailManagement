@@ -12,12 +12,13 @@ namespace RRMDataManager.Controllers
        
 
         // GET: User/5
-        public List<UserModel> GetById()
+        
+        public UserModel GetById()
         {
             var id = RequestContext.Principal.Identity.GetUserId();
             var data = new UserDataAccess();
-            var users = data.GetUserById(id);
-            return users;
+            var user = data.GetUserById(id);
+            return user;
         }
     }
 }

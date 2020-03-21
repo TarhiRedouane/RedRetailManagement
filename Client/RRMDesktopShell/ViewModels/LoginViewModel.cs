@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Caliburn.Micro;
-using RRMDesktopShell.Helpers;
+using RRMDesktopShell.Library.Api;
 
 namespace RRMDesktopShell.ViewModels
 {
@@ -63,10 +63,12 @@ namespace RRMDesktopShell.ViewModels
             try
             {
                 ErrorMessage = $"";
-                var user = await _apiHelper.Authenticate(userName, Password);
+                var result = await _apiHelper.Authenticate(userName, Password);
+
+                //get the user information 
+               await _apiHelper.GetLoggedInUser(result.Access_Token);
             }
             catch (Exception ex){ ErrorMessage =ex.Message; }
-            
         }
     }
 }

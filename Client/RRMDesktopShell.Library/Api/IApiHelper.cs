@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
-using RRMDesktopShell.Models;
+using RRMDesktopShell.Library.Models;
 
-namespace RRMDesktopShell.Helpers
+namespace RRMDesktopShell.Library.Api
 {
     public interface IApiHelper
     {
         Task<AuthenticatedUser> Authenticate(string username, string password);
+        Task GetLoggedInUser(string token);
     }
 }

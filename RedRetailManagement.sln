@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.645
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{CD9275E6-516D-4890-9724-3B09FAF7B7D4}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RRMDesktopShell", "Client\RRMDesktopShell\RRMDesktopShell.csproj", "{14F2F0CE-A5A5-45E9-BB7A-14083E70AFDF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RRMDataManager.Library", "Server\RRMDataManager.Library\RRMDataManager.Library.csproj", "{963C3BEF-7831-4AFC-918E-26EC2F2FEDC6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RRMDesktopShell.Library", "Client\RRMDesktopShell.Library\RRMDesktopShell.Library.csproj", "{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{963C3BEF-7831-4AFC-918E-26EC2F2FEDC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{963C3BEF-7831-4AFC-918E-26EC2F2FEDC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{963C3BEF-7831-4AFC-918E-26EC2F2FEDC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +54,7 @@ Global
 		{D9CCF67E-3165-4ADD-BD6F-69A943396C31} = {AE041BC7-20FA-4D51-8319-41C65CABF610}
 		{14F2F0CE-A5A5-45E9-BB7A-14083E70AFDF} = {CD9275E6-516D-4890-9724-3B09FAF7B7D4}
 		{963C3BEF-7831-4AFC-918E-26EC2F2FEDC6} = {AE041BC7-20FA-4D51-8319-41C65CABF610}
+		{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52} = {CD9275E6-516D-4890-9724-3B09FAF7B7D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {080D1ED6-DFB4-4A2A-B09E-BA22CCC1FEF1}
