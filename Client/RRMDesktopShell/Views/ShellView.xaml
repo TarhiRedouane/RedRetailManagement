@@ -7,6 +7,11 @@
         mc:Ignorable="d"
         Title="ShellView" Height="450" Width="800">
     <DockPanel>
+        <DockPanel.Background>
+            <ImageBrush TileMode="Tile" ViewportUnits="Absolute"
+                        Viewport="0 0 500 500"
+                        ImageSource="../Images/Backgrounds/emoji-background.png"/>
+        </DockPanel.Background>
         <Menu DockPanel.Dock="Top" FontSize="{StaticResource FontSizeRegular}">
             <MenuItem Header="_File"></MenuItem>
             <MenuItem Header="_Account">

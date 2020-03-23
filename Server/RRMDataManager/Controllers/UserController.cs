@@ -5,8 +5,7 @@ using RRMDataManager.Library.DataAccess;
 
 namespace RRMDataManager.Controllers
 {
-    [Authorize]
-    [RoutePrefix("api/User")]
+      
     public class UserController : ApiController
     {
        
