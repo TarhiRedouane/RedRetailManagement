@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RRMDataManager.Library.DataAccess
+namespace RRMDataManager.Library.Models
 {
     public class UserModel
     {

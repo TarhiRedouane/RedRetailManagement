@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using RRMDesktopShell.Events;
 using RRMDesktopShell.Library.Api;
 
 namespace RRMDesktopShell.ViewModels
@@ -8,10 +9,12 @@ namespace RRMDesktopShell.ViewModels
     public class LoginViewModel : Screen
     {
         private readonly IApiHelper _apiHelper;
+        private readonly IEventAggregator _eventAggregator;
 
-        public LoginViewModel(IApiHelper apiHelper)
+        public LoginViewModel(IApiHelper apiHelper,IEventAggregator eventAggregator)
         {
             _apiHelper = apiHelper;
+            _eventAggregator = eventAggregator;
         }
 
         #region Properties
@@ -67,6 +70,7 @@ namespace RRMDesktopShell.ViewModels
 
                 //get the user information 
                await _apiHelper.GetLoggedInUser(result.Access_Token);
+               _eventAggregator.PublishOnUIThread(new LoggedInEvent());
             }
             catch (Exception ex){ ErrorMessage =ex.Message; }
         }

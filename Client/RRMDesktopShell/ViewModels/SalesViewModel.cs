@@ -1,15 +1,40 @@
 ﻿using System.ComponentModel;
+using System.Threading.Tasks;
 using Caliburn.Micro;
+using RRMDesktopShell.Library.Api;
+using RRMDesktopShell.Library.Models;
 
 namespace RRMDesktopShell.ViewModels
 {
     public class SalesViewModel : Screen
     {
+        private readonly IProductApi _productApi;
+
+        #region Constructor
+
+        public SalesViewModel(IProductApi productApi)
+        {
+            _productApi = productApi;
+            
+        }
+
+        protected override async void OnInitialize()
+        {
+            await LoadProductsAsync();
+        }
+
+        public async Task LoadProductsAsync()
+        {
+            var products = await _productApi.GetAll();
+            Products = new BindingList<ProductModel>(products);
+        }
+
+        #endregion
         #region Properties
 
-        private BindingList<string> _products;
+        private BindingList<ProductModel> _products;
 
-        public BindingList<string> Products
+        public BindingList<ProductModel> Products
         {
             get => _products;
             set
@@ -19,9 +44,9 @@ namespace RRMDesktopShell.ViewModels
             }
         }
 
-        private string _itemQuantity;
+        private int _itemQuantity;
 
-        public string ItemQuantity
+        public int ItemQuantity
         {
             get => _itemQuantity;
             set

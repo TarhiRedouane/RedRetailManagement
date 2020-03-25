@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using RRMDataManager.Library.DataAccess;
+using RRMDataManager.Library.Models;
 
 namespace RRMDataManager.Controllers
 {

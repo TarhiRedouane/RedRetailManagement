@@ -15,7 +15,7 @@ namespace RRMDesktopShell.Startup
     public class Bootstrapper : BootstrapperBase
     {
 
-        private static IContainer Container;
+        private static IContainer _container;
 
         public Bootstrapper()
         {
@@ -50,32 +50,36 @@ namespace RRMDesktopShell.Startup
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
+            builder.RegisterType<ProductApi>()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
+
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
                 .Where(type => type.Name.EndsWith("ViewModel"))
                 .ToList()
                 .ForEach(viewModelType => { builder.RegisterType(viewModelType).AsSelf(); });
 
-            Container = builder.Build();
+            _container = builder.Build();
         }
 
         protected override IEnumerable<object> GetAllInstances(Type service)
         {
             var type = typeof(IEnumerable<>).MakeGenericType(service);
-            return Container.Resolve(type) as IEnumerable<object>;
+            return _container.Resolve(type) as IEnumerable<object>;
         }
 
         protected override object GetInstance(Type service, string key)
         {
             if (string.IsNullOrWhiteSpace(key))
             {
-                if (Container.IsRegistered(service))
-                    return Container.Resolve(service);
+                if (_container.IsRegistered(service))
+                    return _container.Resolve(service);
             }
             else
             {
-                if (Container.IsRegisteredWithKey(key, service))
-                    return Container.ResolveKeyed(key, service);
+                if (_container.IsRegisteredWithKey(key, service))
+                    return _container.ResolveKeyed(key, service);
             }
 
             var msgFormat = "Could not locate any instances of contract {0}.";
@@ -85,7 +89,7 @@ namespace RRMDesktopShell.Startup
 
         protected override void BuildUp(object instance)
         {
-            Container.InjectProperties(instance);
+            _container.InjectProperties(instance);
         }
 
     }
