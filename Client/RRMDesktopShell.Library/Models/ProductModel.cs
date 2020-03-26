@@ -13,5 +13,6 @@
         /// quantity in stock inventory for the product
         /// </summary>
         public int QuantityInStock { get; set; }
+        public bool IsTaxable { get; set; }
     }
 }

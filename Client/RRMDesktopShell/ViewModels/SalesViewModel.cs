@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Caliburn.Micro;
+using RRMDesktopShell.Helpers;
 using RRMDesktopShell.Library.Api;
 using RRMDesktopShell.Library.Models;
 
@@ -11,13 +12,14 @@ namespace RRMDesktopShell.ViewModels
     public class SalesViewModel : Screen
     {
         private readonly IProductApi _productApi;
+        private readonly IConfigHelper _configHelper;
 
         #region Constructor
 
-        public SalesViewModel(IProductApi productApi)
+        public SalesViewModel(IProductApi productApi, IConfigHelper configHelper)
         {
             _productApi = productApi;
-
+            _configHelper = configHelper;
         }
 
         protected override async void OnInitialize()
@@ -98,16 +100,27 @@ namespace RRMDesktopShell.ViewModels
             }
         }
 
-        public string SubTotal => CalculateSubTotal();
+        public string SubTotal => CalculateSubTotal().ToString("C", CultureInfo.CurrentCulture);
 
-        private string CalculateSubTotal()
+        private decimal CalculateSubTotal()
         {
-            var calc = Cart?.ToList().Sum(item => (item.Product.RetailPrice * item.QuantityInCart)).ToString("C",CultureInfo.CurrentCulture);
+            var calc = Cart?.ToList().Sum(item => (item.Product.RetailPrice * item.QuantityInCart)) ?? 0;
             return calc;
         }
 
-        public string Tax => "$0.01";
-        public string Total => "$0.01";
+        public string Tax => CalculateTax().ToString("C", CultureInfo.CurrentCulture);
+
+        private decimal CalculateTax()
+        {
+            var taxRate = _configHelper.GetTaxRate();
+            var calc = Cart?
+                .ToList()
+                .Where(item => item.Product.IsTaxable)
+                .Sum(item => item.Product.RetailPrice * item.QuantityInCart * (taxRate / 100)) ?? 0;
+            return calc;
+        }
+
+        public string Total => (CalculateSubTotal()+CalculateTax()).ToString("C",CultureInfo.CurrentCulture);
 
         #endregion
 
@@ -122,6 +135,8 @@ namespace RRMDesktopShell.ViewModels
 
             ReinitializeQuantities();
             NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
         }
 
         private void UpdateQuantity()
@@ -152,7 +167,7 @@ namespace RRMDesktopShell.ViewModels
             ItemQuantity = 1;
         }
 
-        public bool CanAddToCart =>  IsQuantityValid() ;
+        public bool CanAddToCart => IsQuantityValid();
 
         /// <summary>
         /// check if there is at least  one quantity for the current product ,
@@ -169,6 +184,8 @@ namespace RRMDesktopShell.ViewModels
         public void RemoveFromCart()
         {
             NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
         }
         //make sure something is selected from cart
         public bool CanRemoveFromCart => true;

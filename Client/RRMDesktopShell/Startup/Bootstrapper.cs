@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using Autofac;
 using Caliburn.Micro;
 using RRMDesktopShell.AttachedProperties;
+using RRMDesktopShell.Helpers;
 using RRMDesktopShell.Library.Api;
 using RRMDesktopShell.Library.Models;
 using RRMDesktopShell.ViewModels;
@@ -47,6 +48,10 @@ namespace RRMDesktopShell.Startup
                 .SingleInstance();
 
             builder.RegisterType<LoggedInUserModel>()
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder.RegisterType<ConfigHelper>()
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
