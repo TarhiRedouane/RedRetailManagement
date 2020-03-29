@@ -9,5 +9,6 @@ namespace RRMDesktopShell.Library.Api
         Task<AuthenticatedUser> Authenticate(string username, string password);
         Task GetLoggedInUser(string token);
         HttpClient ApiClient { get; }
+        void LogOutUser();
     }
 }

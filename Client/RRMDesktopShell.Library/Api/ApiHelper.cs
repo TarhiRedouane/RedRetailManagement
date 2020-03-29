@@ -50,6 +50,10 @@ namespace RRMDesktopShell.Library.Api
             }
         }
 
+        public void LogOutUser()
+        {
+            _apiClient.DefaultRequestHeaders.Clear();
+        }
         public async Task GetLoggedInUser(string token)
         {
             _apiClient.DefaultRequestHeaders.Accept.Clear();
