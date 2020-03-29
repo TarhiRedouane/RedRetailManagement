@@ -106,6 +106,7 @@ namespace RRMDesktopShell.ViewModels
             {
                 _selectedCart = value;
                 NotifyOfPropertyChange(() => SelectedCart);
+                NotifyOfPropertyChange(() => CanRemoveFromCart);
             }
         }
 
@@ -192,6 +193,8 @@ namespace RRMDesktopShell.ViewModels
 
         public void RemoveFromCart()
         {
+            SelectedCart.Product.QuantityInStock += SelectedCart.QuantityInCart;
+            Cart?.Remove(SelectedCart);
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
@@ -202,8 +205,7 @@ namespace RRMDesktopShell.ViewModels
 
         private bool IsItemSelectedFromCart()
         {
-            return false;
-            //return SelectedCartItem != null;
+            return SelectedCart != null;
         }
 
 
