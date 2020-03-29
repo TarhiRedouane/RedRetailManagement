@@ -15,7 +15,6 @@ namespace RRMDataManager.Library.DataAccess
             //start filling in the sale detail models we will save to the database 
             var details = new List<SaleDetailDbModel>();
             var productDataAccess = new ProductDataAccess();
-            var dataAccess = new SqlDataAccess();
             var taxRate = ConfigHelper.GetTaxRate();
             saleInfo.SaleDetails.ForEach(saleDetail =>
             {
@@ -42,17 +41,28 @@ namespace RRMDataManager.Library.DataAccess
                 CashierId = cashierId
             };
             sale.Total = sale.SubTotal + sale.Tax;
-            //save the sale model 
-            //get the id from the sale model
-            var saleId =dataAccess.SaveData<int,SaleDbModel>("[dbo].[spInsertSale]", sale, "RRMData");
-            // finish filling sale details models with id 
-            foreach (var detail in details)
+            using (SqlDataAccess sql = new SqlDataAccess())
             {
-                detail.SaleId = saleId;
-                //save the sale detail models
-                dataAccess.SaveData<int,SaleDetailDbModel>("[dbo].[spInsertSaleDetail]", detail, "RRMData");
+                try
+                {
+                    sql.StartTransaction("RRMData");
+                    //save the sale model 
+                    //get the id from the sale model
+                    var saleId = sql.SaveDataInTransaction<int, SaleDbModel>("[dbo].[spInsertSale]", sale);
+                    // finish filling sale details models with id 
+                    foreach (var detail in details)
+                    {
+                        detail.SaleId = saleId;
+                        //save the sale detail models
+                        sql.SaveDataInTransaction<int, SaleDetailDbModel>("[dbo].[spInsertSaleDetail]", detail);
+                    }
+                }
+                catch
+                {
+                    sql.RollbackTransaction();
+                    throw;
+                }
             }
-
         }
     }
 }
