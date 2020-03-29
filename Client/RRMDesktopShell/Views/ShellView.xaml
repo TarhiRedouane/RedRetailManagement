@@ -13,13 +13,20 @@
                         ImageSource="../Images/Backgrounds/emoji-background.png"/>
         </DockPanel.Background>
         <Menu DockPanel.Dock="Top" FontSize="{StaticResource FontSizeRegular}">
-            <MenuItem Header="_File"></MenuItem>
+            <MenuItem Header="_File">
+                <MenuItem x:Name="ExitApplication" Header="E_xit"></MenuItem>
+            </MenuItem>
             <MenuItem Header="_Account">
-                <MenuItem x:Name="LoginScreen" Header="_Login"></MenuItem>
+                <MenuItem x:Name="Logout" Header="_Log Out"></MenuItem>
             </MenuItem>
         </Menu>
         <Grid>
-            <ContentControl x:Name="ActiveItem" Margin="20 5 20 20"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="13*"/>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="740*"/>
+            </Grid.ColumnDefinitions>
+            <ContentControl x:Name="ActiveItem" Margin="0,5,20,20" Grid.Column="2"/>
         </Grid>
     </DockPanel>
 </Window>

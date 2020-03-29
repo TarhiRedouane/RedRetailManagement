@@ -21,7 +21,7 @@ namespace RRMDesktopShell.ViewModels
 
         #region Constructor
 
-        public SalesViewModel(IProductApi productApi, IConfigHelper configHelper,ISaleApi saleApi,IMapper mapper)
+        public SalesViewModel(IProductApi productApi, IConfigHelper configHelper, ISaleApi saleApi, IMapper mapper)
         {
             _productApi = productApi;
             _configHelper = configHelper;
@@ -141,11 +141,8 @@ namespace RRMDesktopShell.ViewModels
                 UpdateQuantity();
             else
                 AddNewItemToCart();
-
+            NotifyAmount();
             ReinitializeQuantities();
-            NotifyOfPropertyChange(() => SubTotal);
-            NotifyOfPropertyChange(() => Tax);
-            NotifyOfPropertyChange(() => Total);
             NotifyOfPropertyChange(() => CanCheckout);
         }
 
@@ -195,9 +192,7 @@ namespace RRMDesktopShell.ViewModels
         {
             SelectedCart.Product.QuantityInStock += SelectedCart.QuantityInCart;
             Cart?.Remove(SelectedCart);
-            NotifyOfPropertyChange(() => SubTotal);
-            NotifyOfPropertyChange(() => Tax);
-            NotifyOfPropertyChange(() => Total);
+            NotifyAmount();
             NotifyOfPropertyChange(() => CanCheckout);
         }
         //make sure something is selected from cart
@@ -222,12 +217,34 @@ namespace RRMDesktopShell.ViewModels
                 });
             });
             await _saleApi.PostSale(sale);
+            await ResetSalesViewModel();
         }
 
         public bool CanCheckout => IsCartValid();
         private bool IsCartValid()
         {
             return Cart.Count > 0;
+        }
+
+        #endregion
+
+        #region Methods
+
+        private void NotifyAmount()
+        {
+            NotifyOfPropertyChange(() => SubTotal);
+            NotifyOfPropertyChange(() => Tax);
+            NotifyOfPropertyChange(() => Total);
+        }
+
+        #endregion
+
+        #region Reset
+
+        private async Task ResetSalesViewModel()
+        { 
+            OnInitialize();
+            NotifyAmount();
         }
 
         #endregion

@@ -10,5 +10,6 @@ namespace RRMDesktopShell.Library.Models
         string LastName { get; set; }
         string EmailAdress { get; set; }
         DateTime CreatedDate { get; set; }
+        void ClearProfile();
     }
 }
