@@ -59,6 +59,10 @@ namespace RRMDesktopShell.Startup
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
 
+            builder.RegisterType<SaleApi>()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
+
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
                 .Where(type => type.Name.EndsWith("ViewModel"))

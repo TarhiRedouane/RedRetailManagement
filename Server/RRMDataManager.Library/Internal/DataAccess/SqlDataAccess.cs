@@ -32,20 +32,23 @@ namespace RRMDataManager.Library.Internal.DataAccess
             }
             
         }
+
         /// <summary>
         /// Method that gona save data in sql 
         /// </summary>
-        /// <typeparam name="T">type of parameters that gonna be passed to store procedure</typeparam>
+        /// <typeparam name="TV">type of parameters that gonna be passed to store procedure</typeparam>
+        /// <typeparam name="T">the return type </typeparam>
         /// <param name="storedProcedure">the stored procedure name located in sql</param>
         /// <param name="parameters">the parameters that gonna bed passed to the stored procedure</param>
         /// <param name="connectionStringName">the name of the connection string</param>
-        public void SaveData<T>(string storedProcedure, T parameters, string connectionStringName)
+        /// <returns>returns something from the stored procedure if we explicitly says so</returns>
+        public T SaveData<T,TV>(string storedProcedure, TV parameters, string connectionStringName)
         {
             var connectionString = GetConnectionString(connectionStringName);
             using (IDbConnection cnx = new SqlConnection(connectionString))
             {
-               cnx.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
-                
+               return cnx.ExecuteScalar<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+               
             }
 
         }

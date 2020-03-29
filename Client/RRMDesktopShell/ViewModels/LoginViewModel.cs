@@ -18,7 +18,7 @@ namespace RRMDesktopShell.ViewModels
         }
 
         #region Properties
-        private string _userName;
+        private string _userName = "tarhi.redouane@gmail.com";
         public string UserName
         {
             get => _userName;

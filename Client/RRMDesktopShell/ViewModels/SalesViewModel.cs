@@ -13,13 +13,15 @@ namespace RRMDesktopShell.ViewModels
     {
         private readonly IProductApi _productApi;
         private readonly IConfigHelper _configHelper;
+        private readonly ISaleApi _saleApi;
 
         #region Constructor
 
-        public SalesViewModel(IProductApi productApi, IConfigHelper configHelper)
+        public SalesViewModel(IProductApi productApi, IConfigHelper configHelper,ISaleApi saleApi)
         {
             _productApi = productApi;
             _configHelper = configHelper;
+            _saleApi = saleApi;
         }
 
         protected override async void OnInitialize()
@@ -72,6 +74,7 @@ namespace RRMDesktopShell.ViewModels
             {
                 _cart = value;
                 NotifyOfPropertyChange(() => Cart);
+                NotifyOfPropertyChange(() => CanAddToCart);
             }
         }
 
@@ -114,13 +117,12 @@ namespace RRMDesktopShell.ViewModels
         {
             var taxRate = _configHelper.GetTaxRate();
             var calc = Cart?
-                .ToList()
                 .Where(item => item.Product.IsTaxable)
                 .Sum(item => item.Product.RetailPrice * item.QuantityInCart * (taxRate / 100)) ?? 0;
             return calc;
         }
 
-        public string Total => (CalculateSubTotal()+CalculateTax()).ToString("C",CultureInfo.CurrentCulture);
+        public string Total => (CalculateSubTotal() + CalculateTax()).ToString("C", CultureInfo.CurrentCulture);
 
         #endregion
 
@@ -137,6 +139,7 @@ namespace RRMDesktopShell.ViewModels
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckout);
         }
 
         private void UpdateQuantity()
@@ -186,15 +189,38 @@ namespace RRMDesktopShell.ViewModels
             NotifyOfPropertyChange(() => SubTotal);
             NotifyOfPropertyChange(() => Tax);
             NotifyOfPropertyChange(() => Total);
+            NotifyOfPropertyChange(() => CanCheckout);
         }
         //make sure something is selected from cart
-        public bool CanRemoveFromCart => true;
+        public bool CanRemoveFromCart => IsItemSelectedFromCart();
+
+        private bool IsItemSelectedFromCart()
+        {
+            return false;
+            //return SelectedCartItem != null;
+        }
 
 
-        public void Checkout()
-        { }
+        public async Task Checkout()
+        {
+            //create sale Model and post it to the api 
+            var sale = new SaleModel();
+            Cart.ToList().ForEach(model =>
+            {
+                sale.SaleDetails.Add(new SaleDetailModel
+                {
+                    ProductId = model.Product.Id,
+                    Quantity = model.QuantityInCart
+                });
+            });
+            await _saleApi.PostSale(sale);
+        }
 
-        public bool CanCheckout => true;
+        public bool CanCheckout => IsCartValid();
+        private bool IsCartValid()
+        {
+            return Cart.Count > 0;
+        }
 
         #endregion
     }

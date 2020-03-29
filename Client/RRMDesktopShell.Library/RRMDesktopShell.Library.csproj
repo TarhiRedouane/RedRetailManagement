@@ -52,11 +52,14 @@
     <Compile Include="Api\IApiHelper.cs" />
     <Compile Include="Api\IProductApi.cs" />
     <Compile Include="Api\ProductApi.cs" />
+    <Compile Include="Api\SaleApi.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\CartItemModel.cs" />
     <Compile Include="Models\ILoggedInUserModel.cs" />
     <Compile Include="Models\LoggedInUserModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
+    <Compile Include="Models\SaleDetailModel.cs" />
+    <Compile Include="Models\SaleModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
 using RRMDesktopShell.Library.Models;
 
 namespace RRMDesktopShell.Library.Api
@@ -7,5 +8,6 @@ namespace RRMDesktopShell.Library.Api
     {
         Task<AuthenticatedUser> Authenticate(string username, string password);
         Task GetLoggedInUser(string token);
+        HttpClient ApiClient { get; }
     }
 }

@@ -7,20 +7,18 @@ using RRMDesktopShell.Library.Models;
 
 namespace RRMDesktopShell.Library.Api
 {
-    public class ProductApi : ApiHelper, IProductApi
+    public class ProductApi : IProductApi
     {
-        private readonly ILoggedInUserModel _loggedInUserModel;
+        private readonly IApiHelper _apiHelper;
 
-        public ProductApi(ILoggedInUserModel loggedInUserModel) : base(loggedInUserModel)
+        public ProductApi(IApiHelper apiHelper)
         {
-            _loggedInUserModel = loggedInUserModel;
+            _apiHelper = apiHelper;
         }
 
         public async Task<List<ProductModel>> GetAll()
         {
-            ApiClient.DefaultRequestHeaders.Clear();
-            ApiClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {_loggedInUserModel.Token}");
-            using (HttpResponseMessage response = await ApiClient.GetAsync("api/Product"))
+            using (HttpResponseMessage response = await _apiHelper.ApiClient.GetAsync("api/Product"))
             {
                 if (!response.IsSuccessStatusCode) throw new Exception(response.ReasonPhrase);
                 var result = await response.Content.ReadAsAsync<List<ProductModel>>();
