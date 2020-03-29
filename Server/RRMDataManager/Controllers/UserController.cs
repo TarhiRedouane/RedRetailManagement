@@ -9,10 +9,7 @@ namespace RRMDataManager.Controllers
       
     public class UserController : ApiController
     {
-       
-
         // GET: User/5
-        
         public UserModel GetById()
         {
             var id = RequestContext.Principal.Identity.GetUserId();

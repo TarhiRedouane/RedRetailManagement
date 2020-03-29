@@ -4,11 +4,13 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Autofac;
+using AutoMapper;
 using Caliburn.Micro;
 using RRMDesktopShell.AttachedProperties;
 using RRMDesktopShell.Helpers;
 using RRMDesktopShell.Library.Api;
 using RRMDesktopShell.Library.Models;
+using RRMDesktopShell.Models;
 using RRMDesktopShell.ViewModels;
 
 namespace RRMDesktopShell.Startup
@@ -63,6 +65,8 @@ namespace RRMDesktopShell.Startup
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
 
+            builder.RegisterModule(new AutoMapperModule());
+
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)
                 .Where(type => type.Name.EndsWith("ViewModel"))
@@ -100,6 +104,7 @@ namespace RRMDesktopShell.Startup
         {
             _container.InjectProperties(instance);
         }
+
 
     }
 }

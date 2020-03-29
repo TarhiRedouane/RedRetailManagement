@@ -34,7 +34,23 @@
         <ListBox x:Name="Products" Grid.Row="2" Grid.Column="0"
                  SelectedItem="{Binding SelectedProduct}"
                  MinHeight ="200" MinWidth="150"
-                 DisplayMemberPath="ProductName"/>
+
+                 >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding ProductName}" FontSize="{StaticResource FontSizeLarge}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Price :" FontSize="{StaticResource FontSizeSmaller}"/>
+                            <TextBlock Text="{Binding RetailPrice}" FontSize="{StaticResource FontSizeSmaller}"/>
+                            <TextBlock Text=" " FontSize="{StaticResource FontSizeSmaller}"/>
+                            <TextBlock Text="Qty :" FontSize="{StaticResource FontSizeSmaller}"/>
+                            <TextBlock Text="{Binding QuantityInStock}" FontSize="{StaticResource FontSizeSmaller}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
         <!--column 1 -->
         <StackPanel Orientation="Vertical"

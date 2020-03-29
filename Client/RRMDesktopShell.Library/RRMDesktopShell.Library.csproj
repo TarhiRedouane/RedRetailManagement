@@ -53,6 +53,8 @@
     <Compile Include="Api\IProductApi.cs" />
     <Compile Include="Api\ProductApi.cs" />
     <Compile Include="Api\SaleApi.cs" />
+    <Compile Include="Base\PropertyChangedRedBase.cs" />
+    <Compile Include="ExpressionExtensions.cs" />
     <Compile Include="Models\AuthenticatedUser.cs" />
     <Compile Include="Models\CartItemModel.cs" />
     <Compile Include="Models\ILoggedInUserModel.cs" />
@@ -60,10 +62,12 @@
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\SaleDetailModel.cs" />
     <Compile Include="Models\SaleModel.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

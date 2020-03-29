@@ -1,11 +1,14 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Caliburn.Micro;
 using RRMDesktopShell.Helpers;
 using RRMDesktopShell.Library.Api;
 using RRMDesktopShell.Library.Models;
+using RRMDesktopShell.Models;
 
 namespace RRMDesktopShell.ViewModels
 {
@@ -14,35 +17,38 @@ namespace RRMDesktopShell.ViewModels
         private readonly IProductApi _productApi;
         private readonly IConfigHelper _configHelper;
         private readonly ISaleApi _saleApi;
+        private readonly IMapper _mapper;
 
         #region Constructor
 
-        public SalesViewModel(IProductApi productApi, IConfigHelper configHelper,ISaleApi saleApi)
+        public SalesViewModel(IProductApi productApi, IConfigHelper configHelper,ISaleApi saleApi,IMapper mapper)
         {
             _productApi = productApi;
             _configHelper = configHelper;
             _saleApi = saleApi;
+            _mapper = mapper;
         }
 
         protected override async void OnInitialize()
         {
-            Cart = new BindingList<CartItemModel>();
+            Cart = new BindingList<CartItemDisplayModel>();
             await LoadProductsAsync();
         }
 
         public async Task LoadProductsAsync()
         {
-            var products = await _productApi.GetAll();
-            Products = new BindingList<ProductModel>(products);
+            var productsList = await _productApi.GetAll();
+            var products = _mapper.Map<List<ProductDisplayModel>>(productsList);
+            Products = new BindingList<ProductDisplayModel>(products);
         }
 
         #endregion
 
         #region Properties
 
-        private BindingList<ProductModel> _products;
+        private BindingList<ProductDisplayModel> _products;
 
-        public BindingList<ProductModel> Products
+        public BindingList<ProductDisplayModel> Products
         {
             get => _products;
             set
@@ -65,9 +71,9 @@ namespace RRMDesktopShell.ViewModels
             }
         }
 
-        private BindingList<CartItemModel> _cart;
+        private BindingList<CartItemDisplayModel> _cart;
 
-        public BindingList<CartItemModel> Cart
+        public BindingList<CartItemDisplayModel> Cart
         {
             get => _cart;
             set
@@ -78,9 +84,9 @@ namespace RRMDesktopShell.ViewModels
             }
         }
 
-        private ProductModel _selectedProduct;
+        private ProductDisplayModel _selectedProduct;
 
-        public ProductModel SelectedProduct
+        public ProductDisplayModel SelectedProduct
         {
             get => _selectedProduct;
             set
@@ -91,9 +97,9 @@ namespace RRMDesktopShell.ViewModels
             }
         }
 
-        private CartItemModel _selectedCart;
+        private CartItemDisplayModel _selectedCart;
 
-        public CartItemModel SelectedCart
+        public CartItemDisplayModel SelectedCart
         {
             get => _selectedCart;
             set
@@ -146,7 +152,7 @@ namespace RRMDesktopShell.ViewModels
         {
             var itemInCart = Cart.FirstOrDefault(item => item.Product.Id == SelectedProduct.Id);
             if (itemInCart != null) itemInCart.QuantityInCart += ItemQuantity;
-            Cart.ResetItem(Cart.IndexOf(itemInCart));
+            //Cart.ResetItem(Cart.IndexOf(itemInCart));
         }
 
         private bool ItemExistInCart()
@@ -156,7 +162,7 @@ namespace RRMDesktopShell.ViewModels
 
         private void AddNewItemToCart()
         {
-            var cartItem = new CartItemModel
+            var cartItem = new CartItemDisplayModel
             {
                 Product = SelectedProduct,
                 QuantityInCart = ItemQuantity
