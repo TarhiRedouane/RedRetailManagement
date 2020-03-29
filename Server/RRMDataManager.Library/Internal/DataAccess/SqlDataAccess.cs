@@ -61,12 +61,12 @@ namespace RRMDataManager.Library.Internal.DataAccess
 
         public void StartTransaction(string connectionStringName)
         {
-            string connectionString = GetConnectionString(connectionStringName);
+            var connectionString = GetConnectionString(connectionStringName);
             _connection = new SqlConnection(connectionString);
             _connection.Open();
             _transaction = _connection.BeginTransaction();
         }
-        public void CommitTransaction()
+        private void CommitTransaction()
         {
             _transaction?.Commit();
             _connection?.Close();
