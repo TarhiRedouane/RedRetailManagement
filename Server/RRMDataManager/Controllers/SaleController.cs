@@ -1,16 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using RRMDataManager.Library.DataAccess;
 using RRMDataManager.Library.Models;
-using RRMDataManager.Models;
 
 namespace RRMDataManager.Controllers
 {
     [Authorize]
     public class SaleController : ApiController
     {
+        /// <summary>
+        /// Only for admin => not restful 
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetSalesReport")]
+        public List<SaleReportModel> GetSalesReport()
+        {
+            var saleData = new SaleDataAccess();
+            return saleData.GetSaleReport();
+        } 
+
         // GET: api/Sale
         public IEnumerable<string> Get()
         {

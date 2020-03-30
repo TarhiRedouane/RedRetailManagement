@@ -64,5 +64,14 @@ namespace RRMDataManager.Library.DataAccess
                 }
             }
         }
+        /// <summary>
+        /// returns sale reports to be used by the  owner
+        /// </summary>
+        /// <returns></returns>
+        public List<SaleReportModel> GetSaleReport()
+        {
+            var dataAccess = new SqlDataAccess();
+            return dataAccess.LoadData<SaleReportModel, dynamic>("[dbo].[spSaleReport]", new { }, "RRMData");
+        }
     }
 }
