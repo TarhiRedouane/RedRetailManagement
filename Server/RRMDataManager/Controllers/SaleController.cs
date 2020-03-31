@@ -13,6 +13,7 @@ namespace RRMDataManager.Controllers
         /// Only for admin => not restful 
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "Administrator")]
         [Route("GetSalesReport")]
         public List<SaleReportModel> GetSalesReport()
         {
@@ -33,6 +34,7 @@ namespace RRMDataManager.Controllers
         }
 
         // POST: api/Sale
+        [Authorize(Roles = "Cashier")]
         public void Post([FromBody]SaleModel sale)
         {
             var saleData = new SaleDataAccess();
