@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Caliburn.Micro;
+using RRMCustomControls.Services;
 using RRMDesktopShell.Helpers;
 using RRMDesktopShell.Library.Api;
 using RRMDesktopShell.Library.Models;
@@ -18,21 +19,36 @@ namespace RRMDesktopShell.ViewModels
         private readonly IConfigHelper _configHelper;
         private readonly ISaleApi _saleApi;
         private readonly IMapper _mapper;
+        private readonly IDialogService _dialogService;
+
 
         #region Constructor
 
-        public SalesViewModel(IProductApi productApi, IConfigHelper configHelper, ISaleApi saleApi, IMapper mapper)
+        public SalesViewModel(IProductApi productApi, 
+            IConfigHelper configHelper, 
+            ISaleApi saleApi, 
+            IMapper mapper,
+            IDialogService dialogService)
         {
             _productApi = productApi;
             _configHelper = configHelper;
             _saleApi = saleApi;
             _mapper = mapper;
+            _dialogService = dialogService;
         }
 
         protected override async void OnInitialize()
         {
             Cart = new BindingList<CartItemDisplayModel>();
-            await LoadProductsAsync();
+            try
+            {
+                await LoadProductsAsync();
+            }
+            catch
+            {
+                _dialogService.Message("System Error","Unauthorized","you do not have permission to interact with the sales form");
+                TryClose();
+            }
         }
 
         public async Task LoadProductsAsync()

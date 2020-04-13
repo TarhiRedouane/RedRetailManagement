@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using Autofac;
-using AutoMapper;
 using Caliburn.Micro;
-using RRMDesktopShell.AttachedProperties;
+using RRMCustomControls.AttachedProperties;
+using RRMCustomControls.Services;
 using RRMDesktopShell.Helpers;
 using RRMDesktopShell.Library.Api;
 using RRMDesktopShell.Library.Models;
-using RRMDesktopShell.Models;
 using RRMDesktopShell.ViewModels;
 
 namespace RRMDesktopShell.Startup
@@ -65,14 +65,22 @@ namespace RRMDesktopShell.Startup
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
 
+            builder.RegisterType<DialogService>()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
+
             builder.RegisterModule(new AutoMapperModule());
 
-            GetType().Assembly.GetTypes()
-                .Where(type => type.IsClass)
-                .Where(type => type.Name.EndsWith("ViewModel"))
-                .ToList()
-                .ForEach(viewModelType => { builder.RegisterType(viewModelType).AsSelf(); });
+            var assemblies = Loader.CreateAssemblies(GetType().Assembly);
 
+            foreach (var assembly in assemblies)
+            {
+                assembly.GetTypes()
+                    .Where(type => type.IsClass)
+                    .Where(type => type.Name.EndsWith("ViewModel"))
+                    .ToList()
+                    .ForEach(viewModelType => { builder.RegisterType(viewModelType).AsSelf(); });
+            }
             _container = builder.Build();
         }
 
@@ -105,6 +113,9 @@ namespace RRMDesktopShell.Startup
             _container.InjectProperties(instance);
         }
 
-
+        protected override IEnumerable<Assembly> SelectAssemblies()
+        {
+            return Loader.CreateAssemblies(GetType().Assembly);
+        }
     }
 }

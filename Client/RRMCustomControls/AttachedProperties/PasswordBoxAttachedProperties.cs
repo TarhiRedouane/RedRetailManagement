@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace RRMDesktopShell.AttachedProperties
+namespace RRMCustomControls.AttachedProperties
 {
     /// <summary>
     /// The MonitorPassword attached property for <see cref="PasswordBox "/>

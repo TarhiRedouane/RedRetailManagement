@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using RRMDataManager.Library.DataAccess;
 using RRMDataManager.Library.Models;

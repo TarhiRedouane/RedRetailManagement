@@ -2,16 +2,16 @@
 using System.Globalization;
 using System.Windows;
 
-namespace RRMDesktopShell.ValueConverters
+namespace RRMCustomControls.ValueConverters
 {
     /// <summary>
-    /// a converter that takes in a boolean and return a <see cref="Visibility"/>
+    /// a convrter that takes in a boolean and return a <see cref="Visibility"/>
     /// </summary>
-    public class ReverseBooleanToVisibilityConverter : BaseValueConverter<ReverseBooleanToVisibilityConverter>
+    public class BooleanToVisibilityConverter : BaseValueConverter<BooleanToVisibilityConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? Visibility.Visible : Visibility.Collapsed;
+            return (bool)value ? Visibility.Collapsed : Visibility.Visible;
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

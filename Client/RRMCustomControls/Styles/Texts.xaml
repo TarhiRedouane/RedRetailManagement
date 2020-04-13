@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:attached="clr-namespace:RRMDesktopShell.AttachedProperties"
-                    xmlns:valueConverters="clr-namespace:RRMDesktopShell.ValueConverters">
+                    xmlns:valueConverters="clr-namespace:RRMCustomControls.ValueConverters"
+                    xmlns:attachedProperties="clr-namespace:RRMCustomControls.AttachedProperties">
 
     <ResourceDictionary.MergedDictionaries>
         <!-- Order is important -->
@@ -112,7 +112,7 @@
         <Setter Property="Background" Value="{StaticResource ForegroundLightBrush}" />
         <Setter Property="Foreground" Value="{StaticResource ForegroundVeryDarkBrush}" />
 
-        <Setter Property="attached:MonitorPasswordProperty.Value" Value="True"/>
+        <Setter Property="attachedProperties:MonitorPasswordProperty.Value" Value="True"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -136,7 +136,7 @@
                                    VerticalAlignment="Center"
                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                    Foreground="{StaticResource ForegroundDarkBrush}"
-                                   Visibility="{TemplateBinding attached:HasTextProperty.Value,Converter={valueConverters:BooleanToVisibilityConverter}}"
+                                   Visibility="{TemplateBinding attachedProperties:HasTextProperty.Value,Converter={valueConverters:BooleanToVisibilityConverter}}"
                                    >
                         </TextBlock>
 

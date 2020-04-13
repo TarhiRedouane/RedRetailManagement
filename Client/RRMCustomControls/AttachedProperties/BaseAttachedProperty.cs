@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace RRMDesktopShell.AttachedProperties
+namespace RRMCustomControls.AttachedProperties
 {
     /// <summary>
     /// A base attached property to replace the vanilla wpf attached property

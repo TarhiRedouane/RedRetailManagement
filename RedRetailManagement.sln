@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RRMDataManager.Library", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RRMDesktopShell.Library", "Client\RRMDesktopShell.Library\RRMDesktopShell.Library.csproj", "{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RRMCustomControls", "Client\RRMCustomControls\RRMCustomControls.csproj", "{0627217B-B979-4B0A-BAA7-24675DF42CC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0627217B-B979-4B0A-BAA7-24675DF42CC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0627217B-B979-4B0A-BAA7-24675DF42CC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0627217B-B979-4B0A-BAA7-24675DF42CC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0627217B-B979-4B0A-BAA7-24675DF42CC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{14F2F0CE-A5A5-45E9-BB7A-14083E70AFDF} = {CD9275E6-516D-4890-9724-3B09FAF7B7D4}
 		{963C3BEF-7831-4AFC-918E-26EC2F2FEDC6} = {AE041BC7-20FA-4D51-8319-41C65CABF610}
 		{0E96EFD7-1B05-4BA7-96E9-252B50DD5B52} = {CD9275E6-516D-4890-9724-3B09FAF7B7D4}
+		{0627217B-B979-4B0A-BAA7-24675DF42CC1} = {CD9275E6-516D-4890-9724-3B09FAF7B7D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {080D1ED6-DFB4-4A2A-B09E-BA22CCC1FEF1}

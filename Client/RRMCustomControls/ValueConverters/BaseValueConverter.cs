@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
 
-namespace RRMDesktopShell.ValueConverters
+namespace RRMCustomControls.ValueConverters
 {
     /// <summary>
     /// A base value converter that allows direct XAML usage
