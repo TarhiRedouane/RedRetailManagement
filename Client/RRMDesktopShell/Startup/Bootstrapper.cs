@@ -65,6 +65,10 @@ namespace RRMDesktopShell.Startup
                 .AsImplementedInterfaces()
                 .InstancePerDependency();
 
+            builder.RegisterType<UserApi>()
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
+
             builder.RegisterType<DialogService>()
                 .AsImplementedInterfaces()
                 .InstancePerDependency();

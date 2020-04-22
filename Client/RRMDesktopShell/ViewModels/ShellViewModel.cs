@@ -33,6 +33,11 @@ namespace RRMDesktopShell.ViewModels
             TryClose();
         }
 
+        public void UserManagement()
+        {
+            ActivateItem(IoC.Get<UsersDisplayViewModel>());
+        }
+
         public void Logout()
         {
             //initialize model
