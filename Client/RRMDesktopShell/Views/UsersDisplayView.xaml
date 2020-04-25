@@ -11,16 +11,11 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Header -->
@@ -31,7 +26,7 @@
         <TextBlock Text="Users" Style="{StaticResource HeaderText}" Grid.Row="1" Grid.Column="0" />
         <ListBox x:Name="Users" Grid.Row="2" Grid.Column="0"
                  MinHeight ="200" MinWidth="150"
-
+                 SelectedItem="{Binding SelectedUser,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                  >
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -39,11 +34,34 @@
                         <TextBlock Text="{Binding Email}" FontSize="{StaticResource FontSizeLarge}"/>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="Roles :" FontSize="{StaticResource FontSizeSmaller}"/>
-                            <TextBlock Text="{Binding RolesList}" FontSize="{StaticResource FontSizeSmaller}"/>
+                            <TextBlock Text="{Binding RolesList,UpdateSourceTrigger=PropertyChanged}" FontSize="{StaticResource FontSizeSmaller}"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <!--column 1 -->
+
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1" Grid.Column="1"
+                    Grid.RowSpan="2"
+                    Margin="20">
+            <TextBlock x:Name="SelectedUserName" Style="{StaticResource HeaderText}"/>
+            <TextBlock Text="Current Roles" Style="{StaticResource LeftText}"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+                <ListBox x:Name="SelectedUserRoles" 
+                         SelectedItem="{Binding SelectedRoleToRemove}" MinWidth="150"></ListBox>
+                <Button x:Name="RemoveSelectedRole" Content="Remove"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox x:Name="AvailableRoles" 
+                          SelectedItem="{Binding SelectedRoleToAdd}" MinWidth="150"/>
+                <Button x:Name="AddSelectedRole" Content="Add Role"/>
+            </StackPanel>
+
+        </StackPanel>
+
     </Grid>
 </UserControl>

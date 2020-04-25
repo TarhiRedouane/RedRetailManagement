@@ -32,6 +32,13 @@
         <Setter Property="Margin" Value="0 6" />
     </Style>
 
+    <Style TargetType="{x:Type TextBlock}" x:Key="LeftText" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundMainBrush}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="0 6" />
+    </Style>
+
 
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
 

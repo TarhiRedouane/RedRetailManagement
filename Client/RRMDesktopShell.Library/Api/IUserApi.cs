@@ -7,5 +7,8 @@ namespace RRMDesktopShell.Library.Api
     public interface IUserApi
     {
         Task<List<UserModel>> GetAll();
+        Task<Dictionary<string,string>> GetAllRoles();
+        Task AddRole(string userId ,string roleName);
+        Task DeleteRole(string userId, string roleName);
     }
 }

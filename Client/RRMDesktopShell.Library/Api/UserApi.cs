@@ -25,5 +25,33 @@ namespace RRMDesktopShell.Library.Api
                 return result;
             }
         }
+
+        public async Task<Dictionary<string,string>> GetAllRoles()
+        {
+            using (var response = await _apiHelper.ApiClient.GetAsync("api/User/GetAllRoles"))
+            {
+                if (!response.IsSuccessStatusCode) throw new Exception(response.ReasonPhrase);
+                var result = await response.Content.ReadAsAsync<Dictionary<string,string>>();
+                return result;
+            }
+        }
+
+        public async Task AddRole(string userId ,string roleName)
+        {
+            var data = new {userId, roleName};
+            using (var response = await _apiHelper.ApiClient.PostAsJsonAsync("api/User/AddRole",data))
+            {
+                if (!response.IsSuccessStatusCode) throw new Exception(response.ReasonPhrase);
+            }
+        }
+
+        public async Task DeleteRole(string userId, string roleName)
+        {
+            var data = new { userId, roleName };
+            using (var response = await _apiHelper.ApiClient.PostAsJsonAsync("api/User/DeleteRole", data))
+            {
+                if (!response.IsSuccessStatusCode) throw new Exception(response.ReasonPhrase);
+            }
+        }
     }
 }

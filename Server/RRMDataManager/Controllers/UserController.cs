@@ -46,6 +46,43 @@ namespace RRMDataManager.Controllers
                 return userRoles;
             }
         }
+        [Authorize(Roles = "Administrator")]
+        [HttpGet]
+        [Route("api/User/GetAllRoles")]
+        public Dictionary<string, string> GetAllRoles()
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                return context.Roles.ToDictionary(role => role.Id, role => role.Name);
+            }
+        }
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        [Route("api/User/AddRole")]
+        public void AddRole(UserRolePairModel userRole)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                userManager.AddToRole(userRole.UserId, userRole.RoleName);
+            }
+        }
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        [Route("api/User/DeleteRole")]
+        public void DeleteRole(UserRolePairModel userRole)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+                userManager.RemoveFromRole(userRole.UserId, userRole.RoleName);
+            }
+        }
     }
 
 }
